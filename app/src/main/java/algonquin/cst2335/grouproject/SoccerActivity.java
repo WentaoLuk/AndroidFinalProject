@@ -40,6 +40,7 @@ public class SoccerActivity extends AppCompatActivity {
         tx.add(R.id.fragmentRoom, soccerListFragment);
         tx.commit();
 
+
     }
 
 

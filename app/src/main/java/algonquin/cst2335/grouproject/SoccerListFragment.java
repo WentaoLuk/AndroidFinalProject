@@ -2,11 +2,15 @@ package algonquin.cst2335.grouproject;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,13 +23,15 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -34,7 +40,6 @@ public class SoccerListFragment extends Fragment {
     RecyclerView soccerList;
     NewsAdapter adt;
     SQLiteDatabase db;
-    ArrayList<oneRowMessage> messages = new ArrayList<>();
     Button savedButton;
     ArrayList<oneRowMessage> news = new ArrayList<>();
     private String stringURL;
@@ -56,10 +61,29 @@ public class SoccerListFragment extends Fragment {
 //
 //        });
 
-        System.out.println("going back 1111111111111");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        adt = new NewsAdapter();
+        soccerList.setAdapter(adt);
+//        soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
+        for (int i = 1; i <= items.size(); i++) {
+            String title = items.get(i).get("title");
+            String pubDate = items.get(i).get("pubDate");
+            String link = items.get(i).get("link");
+            String description = items.get(i).get("description");
+            String imgUrl = items.get(i).get("imgUrl");
+            titleMessage = new oneRowMessage(i, pubDate, link, title, description, imgUrl);
+            news.add(titleMessage);
+            adt.notifyItemInserted(news.size() - 1);
+            soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
+        }
+        System.out.println("www");
         return soccerLayout;
+
     }
 
 
@@ -68,15 +92,15 @@ public class SoccerListFragment extends Fragment {
         String pubdate;
         String link;
         String titleName;
-        String timePosted;
+        String description;
         String imgUrl;
 
-        public oneRowMessage(int id, String pubdate, String link, String titleName, String timePosted, String imgUrl) {
+        public oneRowMessage(int id, String pubdate, String link, String titleName, String description, String imgUrl) {
             this.id = id;
             this.pubdate = pubdate;
             this.link = link;
             this.titleName = titleName;
-            this.timePosted = timePosted;
+            this.description = description;
             this.imgUrl = imgUrl;
         }
 
@@ -96,9 +120,6 @@ public class SoccerListFragment extends Fragment {
             return titleName;
         }
 
-        public String getTimePosted() {
-            return timePosted;
-        }
 
         public String getImgUrl() {
             return imgUrl;
@@ -109,15 +130,23 @@ public class SoccerListFragment extends Fragment {
     private class MyRowViews extends RecyclerView.ViewHolder {
 
         TextView titleText;
-        TextView timeText;
+        TextView dateText;
+        ImageView imagePreview;
+        int position = -1;
 
-//        int position = -1;
+
+        //        int position = -1;
         //Constructor
         public MyRowViews(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.message);
-            timeText = itemView.findViewById(R.id.time);
+            dateText = itemView.findViewById(R.id.time);
+            imagePreview= itemView.findViewById(R.id.imageView);
 
+        }
+
+        public void setPosition(int position) {
+            this.position = position;
         }
     }
 
@@ -134,9 +163,37 @@ public class SoccerListFragment extends Fragment {
 
 
         @Override
-        public void onBindViewHolder(MyRowViews holder, int position) {
+        public void onBindViewHolder(MyRowViews holder, int position){
             holder.titleText.setText(news.get(position).getTitleName());
-            holder.timeText.setText(news.get(position).getTimePosted());
+            holder.dateText.setText(news.get(position).getPubdate());
+
+            ExecutorService newThread = Executors.newSingleThreadExecutor();
+            newThread.execute(() -> {
+                try {
+
+                    String stringUrl = news.get(position).getImgUrl().replace("http://","https://");
+
+                    URL url = new URL(stringUrl);
+
+
+
+                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+
+                    getActivity().runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            holder.imagePreview.setImageBitmap(bmp);
+
+                        }
+                    });
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                holder.setPosition(position);
+            });
         }
 
         @Override
@@ -218,7 +275,6 @@ public class SoccerListFragment extends Fragment {
                                             break;
                                     }
                                 }
-
                                 items.put(itemIndex++, item);
                             }
 
@@ -232,27 +288,15 @@ public class SoccerListFragment extends Fragment {
             } catch (XmlPullParserException | IOException e) {
                 e.printStackTrace();
             }
-            for (int i = 1; i <= items.size(); i++) {
-                String title = items.get(1).get("title");
-                String pubDate = items.get(1).get("pubDate");
-                String link = items.get(1).get("link");
-                String description = items.get(1).get("description");
-                String imgUrl = items.get(1).get("imgUrl");
 
-                titleMessage = new oneRowMessage(i, title, pubDate, link, description, imgUrl);
-
-                messages.add(titleMessage);
-
-                adt = new NewsAdapter();
-                soccerList.setAdapter(adt);
-
-                adt.notifyItemInserted(messages.size() - 1);
-                soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
-
-                System.out.println("heihei!!!!!!!!!!!!!!!!!!!" + items.get(i));
-            }
         });
         newThread.shutdown();
     }
+
+//    private Bitmap retrieveImage(String url) throws IOException {
+//        InputStream in = new URL(url).openStream();
+//        Bitmap bitmap = BitmapFactory.decodeStream(in);
+//        return bitmap;
+//    }
 
 }
