@@ -30,6 +30,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".NewSavedList"
+            android:label="Preferences">
+            <intent-filter>
+                <action android:name="com.iphonik.chameleon.AppP8052
+                 referenceActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
 
     </application>
 

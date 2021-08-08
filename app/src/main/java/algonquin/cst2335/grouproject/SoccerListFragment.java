@@ -1,13 +1,14 @@
 package algonquin.cst2335.grouproject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,36 +41,35 @@ public class SoccerListFragment extends Fragment {
     oneRowMessage titleMessage;
     RecyclerView soccerList;
     NewsAdapter adt;
-    SQLiteDatabase db;
     Button savedButton;
     ArrayList<oneRowMessage> news = new ArrayList<>();
     private String stringURL;
     String mainTitle;
     HashMap<Integer, HashMap<String, String>> items = new HashMap<>();
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View soccerLayout = getLayoutInflater().inflate(R.layout.news_list, container, false);
-
-        //Remove the current content in the message edit box
 
         soccerList = soccerLayout.findViewById(R.id.myRecycler);
         fetchData();
 
         savedButton = soccerLayout.findViewById(R.id.savedButton);
-//        savedButton.setOnClickListener(e -> {
-//
-//        });
+        savedButton.setOnClickListener(e -> {
+
+            Intent intent = new Intent(getActivity(), NewSavedList.class);
+            getActivity().startActivity(intent);
+
+        });
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         adt = new NewsAdapter();
         soccerList.setAdapter(adt);
-//        soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         for (int i = 1; i <= items.size(); i++) {
             String title = items.get(i).get("title");
@@ -77,9 +79,13 @@ public class SoccerListFragment extends Fragment {
             String imgUrl = items.get(i).get("imgUrl");
             titleMessage = new oneRowMessage(i, pubDate, link, title, description, imgUrl);
             news.add(titleMessage);
-            adt.notifyItemInserted(news.size() - 1);
-            soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
+//            adt.notifyItemInserted(news.size() - 1);
         }
+
+
+
+
+        soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return soccerLayout;
 
@@ -153,7 +159,19 @@ public class SoccerListFragment extends Fragment {
         }
     }
 
+
     private class NewsAdapter extends RecyclerView.Adapter<MyRowViews> {
+
+        //These two methods helps to prevent image from being constantly changed.
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return position;
+        }
 
         @Override
         public MyRowViews onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -164,11 +182,11 @@ public class SoccerListFragment extends Fragment {
             return initRow;
         }
 
-
         @Override
         public void onBindViewHolder(MyRowViews holder, int position) {
             holder.titleText.setText(news.get(position).getTitleName());
             holder.dateText.setText(news.get(position).getPubDate());
+
             holder.itemView.setOnClickListener(e -> {
 
                 SharedPreferences prefs = getActivity().getSharedPreferences("MyId", Context.MODE_PRIVATE);
@@ -180,7 +198,6 @@ public class SoccerListFragment extends Fragment {
                 nextPage.putExtra("TitleName", news.get(position).getTitleName());
                 nextPage.putExtra("Description", news.get(position).getDescription());
 
-
                 startActivity(nextPage);
 
             });
@@ -188,6 +205,7 @@ public class SoccerListFragment extends Fragment {
             ExecutorService newThread = Executors.newSingleThreadExecutor();
             newThread.execute(() -> {
                 try {
+                    //replace http with https to access the input
                     String stringUrl = news.get(position).getImgUrl().replace("http://", "https://");
 
                     URL url = new URL(stringUrl);
@@ -268,7 +286,6 @@ public class SoccerListFragment extends Fragment {
                                         case XmlPullParser.START_TAG:
                                             if (xpp.getName().equals("title") || xpp.getName().equals("pubDate")
                                                     || xpp.getName().equals("link") || xpp.getName().equals("description")) {
-//                                        System.out.println("11111111111111111111"+xpp.getName());
                                                 key = xpp.getName();
                                                 xpp.next();
 
@@ -306,5 +323,6 @@ public class SoccerListFragment extends Fragment {
         });
         newThread.shutdown();
     }
+
 
 }
