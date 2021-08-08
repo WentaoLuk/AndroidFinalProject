@@ -1,10 +1,12 @@
 package algonquin.cst2335.grouproject;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +25,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +80,7 @@ public class SoccerListFragment extends Fragment {
             adt.notifyItemInserted(news.size() - 1);
             soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
         }
-        System.out.println("www");
+
         return soccerLayout;
 
     }
@@ -89,15 +88,15 @@ public class SoccerListFragment extends Fragment {
 
     public class oneRowMessage {
         int id;
-        String pubdate;
+        String pubDate;
         String link;
         String titleName;
         String description;
         String imgUrl;
 
-        public oneRowMessage(int id, String pubdate, String link, String titleName, String description, String imgUrl) {
+        public oneRowMessage(int id, String pubDate, String link, String titleName, String description, String imgUrl) {
             this.id = id;
-            this.pubdate = pubdate;
+            this.pubDate = pubDate;
             this.link = link;
             this.titleName = titleName;
             this.description = description;
@@ -108,8 +107,8 @@ public class SoccerListFragment extends Fragment {
             return id;
         }
 
-        public String getPubdate() {
-            return pubdate;
+        public String getPubDate() {
+            return pubDate;
         }
 
         public String getLink() {
@@ -120,6 +119,10 @@ public class SoccerListFragment extends Fragment {
             return titleName;
         }
 
+        public String getDescription() {
+            return description;
+        }
+
 
         public String getImgUrl() {
             return imgUrl;
@@ -128,6 +131,7 @@ public class SoccerListFragment extends Fragment {
 
 
     private class MyRowViews extends RecyclerView.ViewHolder {
+
 
         TextView titleText;
         TextView dateText;
@@ -141,8 +145,7 @@ public class SoccerListFragment extends Fragment {
             super(itemView);
             titleText = itemView.findViewById(R.id.message);
             dateText = itemView.findViewById(R.id.time);
-            imagePreview= itemView.findViewById(R.id.imageView);
-
+            imagePreview = itemView.findViewById(R.id.imageView);
         }
 
         public void setPosition(int position) {
@@ -163,35 +166,46 @@ public class SoccerListFragment extends Fragment {
 
 
         @Override
-        public void onBindViewHolder(MyRowViews holder, int position){
+        public void onBindViewHolder(MyRowViews holder, int position) {
             holder.titleText.setText(news.get(position).getTitleName());
-            holder.dateText.setText(news.get(position).getPubdate());
+            holder.dateText.setText(news.get(position).getPubDate());
+            holder.itemView.setOnClickListener(e -> {
+
+                SharedPreferences prefs = getActivity().getSharedPreferences("MyId", Context.MODE_PRIVATE);
+                Intent nextPage = new Intent(getActivity().getApplicationContext(), DetailPage.class);
+                nextPage.putExtra("Id", news.get(position).getId());
+                nextPage.putExtra("ImgUrl", news.get(position).getImgUrl());
+                nextPage.putExtra("Link", news.get(position).getLink());
+                nextPage.putExtra("PubDate", news.get(position).getPubDate());
+                nextPage.putExtra("TitleName", news.get(position).getTitleName());
+                nextPage.putExtra("Description", news.get(position).getDescription());
+
+
+                startActivity(nextPage);
+
+            });
 
             ExecutorService newThread = Executors.newSingleThreadExecutor();
             newThread.execute(() -> {
                 try {
-
-                    String stringUrl = news.get(position).getImgUrl().replace("http://","https://");
+                    String stringUrl = news.get(position).getImgUrl().replace("http://", "https://");
 
                     URL url = new URL(stringUrl);
 
-
-
                     Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-
 
                     getActivity().runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
                             holder.imagePreview.setImageBitmap(bmp);
-
                         }
                     });
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                newThread.shutdown();
                 holder.setPosition(position);
             });
         }
@@ -292,11 +306,5 @@ public class SoccerListFragment extends Fragment {
         });
         newThread.shutdown();
     }
-
-//    private Bitmap retrieveImage(String url) throws IOException {
-//        InputStream in = new URL(url).openStream();
-//        Bitmap bitmap = BitmapFactory.decodeStream(in);
-//        return bitmap;
-//    }
 
 }
