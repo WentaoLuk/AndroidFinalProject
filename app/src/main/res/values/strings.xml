@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GrouProject</string>
+    <string name="nullNumber">nullNumber</string>
 </resources>
