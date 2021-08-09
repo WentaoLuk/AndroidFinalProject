@@ -12,17 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GrouProject">
 
-
-        <activity android:name=".SoccerActivity">
+        <activity
+            android:name=".BridgePage"
+            android:label="@string/top_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".LoginPage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+
         <activity
             android:name=".DetailPage"
-            android:label="Preferences">
+            android:label="@string/news_detail">
             <intent-filter>
                 <action android:name="com.iphonik.chameleon.AppP8052
                  referenceActivity" />
@@ -32,7 +43,7 @@
 
         <activity
             android:name=".NewSavedList"
-            android:label="Preferences">
+            android:label="Saved List">
             <intent-filter>
                 <action android:name="com.iphonik.chameleon.AppP8052
                  referenceActivity" />

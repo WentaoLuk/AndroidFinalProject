@@ -1,5 +1,6 @@
 package algonquin.cst2335.grouproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +28,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NewSavedList extends FragmentActivity {
+
 
     RecyclerView soccerList;
     Button savedButton;
@@ -47,8 +52,8 @@ public class NewSavedList extends FragmentActivity {
 
         soccerList = findViewById(R.id.myRecycler);
         savedButton = findViewById(R.id.savedButton);
-        savedButton.setText("GO BACK");
-        savedButton.setOnClickListener(e->{
+        savedButton.setText(getResources().getString(R.string.go_back_button));
+        savedButton.setOnClickListener(e -> {
             finish();
         });
 
@@ -233,9 +238,18 @@ public class NewSavedList extends FragmentActivity {
             return description;
         }
 
-
         public String getImgUrl() {
             return imgUrl;
         }
     }
+
+    /**
+     * This function is to make sure whenever user click back to the fav list page, the page layout will
+     * be refreshed to make sure it is up to date.
+     */
+    public void onRestart() {
+        super.onRestart();
+        recreate();
+    }
+
 }

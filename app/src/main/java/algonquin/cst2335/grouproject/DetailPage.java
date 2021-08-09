@@ -1,6 +1,7 @@
 package algonquin.cst2335.grouproject;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
@@ -74,9 +76,11 @@ public class DetailPage extends AppCompatActivity {
 
             });
             //This is to judge if the article is already saved
-            saveButton.setText(getCount(db, id) == 0 ? "SAVE" : "UNSAVE");
+            saveButton.setText(getCount(db, id) == 0 ? getResources().getString(R.string.save)
+                    : getResources().getString(R.string.unsave));
             saveButton.setOnClickListener(e -> {
-                if (saveButton.getText().toString().equals("SAVE")) {
+                if (saveButton.getText().toString().equals(getResources().getString(R.string.save))) {
+
                     ContentValues newRow = new ContentValues();
                     newRow.put(DatabaseConnector.COLUMN_NAME_ID, id);
                     newRow.put(DatabaseConnector.COLUMN_NAME_TITLE, title.getText().toString());
@@ -87,14 +91,34 @@ public class DetailPage extends AppCompatActivity {
 
                     db.insert(DatabaseConnector.TABLE_NAME, DatabaseConnector.COLUMN_NAME_DESCRIPTION, newRow);
 
-                    Toast.makeText(getApplicationContext(), "Article is saved to your list!", Toast.LENGTH_SHORT).show();
-                    saveButton.setText("UNSAVE");
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.article_saved_notice), Toast.LENGTH_SHORT).show();
+                    saveButton.setText(getResources().getString(R.string.unsave));
                 } else {
-                    db.execSQL("DELETE FROM " + DatabaseConnector.TABLE_NAME + " WHERE id = " + id + "");
-                    Toast.makeText(getApplicationContext(), "Article is removed from your list!",
-                            Toast.LENGTH_SHORT).show();
-                    saveButton.setText("SAVE");
 
+                    AlertDialog alertDialog = new AlertDialog.Builder(this)
+//set icon
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+//set title
+                            .setTitle(getResources().getString(R.string.alert))
+//set message
+                            .setMessage(getResources().getString(R.string.article_delete_confirm))
+//set positive button
+                            .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    db.execSQL("DELETE FROM " + DatabaseConnector.TABLE_NAME + " WHERE id = " + id + "");
+                                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.article_removed_notice),
+                                            Toast.LENGTH_SHORT).show();
+                                    saveButton.setText(getResources().getString(R.string.save));
+                                }
+                            })
+//set negative button
+                            .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                }
+                            })
+                            .show();
                 }
 
                 if (getCount(db, id) == 0) {
@@ -130,10 +154,5 @@ public class DetailPage extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        getWindow().getDecorView().findViewById(android.R.id.content).invalidate();
-    }
 
 }

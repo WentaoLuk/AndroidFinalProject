@@ -1,5 +1,6 @@
 package algonquin.cst2335.grouproject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +23,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -46,6 +49,7 @@ public class SoccerListFragment extends Fragment {
     private String stringURL;
     String mainTitle;
     HashMap<Integer, HashMap<String, String>> items = new HashMap<>();
+    String email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,13 +83,18 @@ public class SoccerListFragment extends Fragment {
             String imgUrl = items.get(i).get("imgUrl");
             titleMessage = new oneRowMessage(i, pubDate, link, title, description, imgUrl);
             news.add(titleMessage);
-//            adt.notifyItemInserted(news.size() - 1);
         }
 
-
-
-
         soccerList.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        Bundle extras = getActivity().getIntent().getExtras();
+        if (extras != null) {
+             email = extras.getString("email") + "";
+        }
+        String snackMessage = getResources().getString(R.string.welcome) + email;
+        Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), snackMessage, Snackbar.LENGTH_LONG);
+        snackbar.show();
+
 
         return soccerLayout;
 
@@ -324,5 +333,9 @@ public class SoccerListFragment extends Fragment {
         newThread.shutdown();
     }
 
+    /**
+     * This function is to make sure whenever user click back to the fav list page, the page layout will
+     * be refreshed to make sure it is up to date.
+     */
 
 }
