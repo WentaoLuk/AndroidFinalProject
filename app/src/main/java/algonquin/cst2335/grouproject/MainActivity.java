@@ -30,31 +30,26 @@ public class MainActivity extends AppCompatActivity {
     Button soccerBtn;
 
     public boolean onOptionsItemSelected( MenuItem item) {
-
-        switch(item.getItemId()){
-
-
+        switch(item.getItemId()) {
             case R.id.id_OC:
-
                 break;
             case R.id.id_car:
-
                 break;
             case R.id.id_movie:
                 Intent movieActivity = new Intent(MainActivity.this,MovieActivity.class);
                 startActivity(movieActivity);
                 break;
             case R.id.id_soccer:
-
-
+                Intent loginPage = new Intent(MainActivity.this, LoginPage.class);
+                startActivity(loginPage);
+                break;
             case R.id.help:
                 new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Need Help?")
-                        .setMessage("To navigate to the activities, select any of the four buttons on the homescreen or the navigation bar")
-                        .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
-                        .show();
+                    .setTitle("Need Help?")
+                    .setMessage("To navigate to the activities, select any of the four buttons on the homescreen or the navigation bar")
+                    .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
+                    .show();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -97,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(yourPage);
 //        });
 //
-//        //Go to SoccerActivity
+       //Go to SoccerActivity
        Button soccerBtn = findViewById(R.id.soccer_btn);
        soccerBtn.setOnClickListener(clk->{
            Intent loginPage = new Intent(MainActivity.this, LoginPage.class);
            startActivity(loginPage);
        });
-//
-//        //Go to CarActivity
-//        Button carBtn = findViewById(R.id.car_btn);
-//        carBtn.setOnClickListener(clk->{
-//            Intent yourPage = new Intent(MainActivity.this, YourActivity.class);
-//            startActivity(yourPage);
-//        });
+
+       //Go to CarActivity
+       Button carBtn = findViewById(R.id.car_btn);
+       carBtn.setOnClickListener(clk->{
+           Intent chargingStationPage = new Intent(MainActivity.this, ChargingStation.class);
+           startActivity(chargingStationPage);
+       });
 
     }
 
