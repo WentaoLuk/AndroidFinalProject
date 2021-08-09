@@ -9,15 +9,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GrouProject">
-        <activity android:name=".MovieActivity">
+
+        <activity
+            android:name=".BridgePage"
+            android:label="@string/top_title">
         </activity>
+
+        <activity android:name=".LoginPage"></activity>
+        <activity android:name=".MovieActivity"></activity>
         <activity android:name=".SavedMovies"></activity>
+        
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <activity
+            android:name=".DetailPage"
+            android:label="@string/news_detail">
+            <intent-filter>
+                <action android:name="com.iphonik.chameleon.AppP8052
+                 referenceActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".NewSavedList"
+            android:label="Saved List">
+            <intent-filter>
+                <action android:name="com.iphonik.chameleon.AppP8052
+                 referenceActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

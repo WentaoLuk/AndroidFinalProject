@@ -98,11 +98,11 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //
 //        //Go to SoccerActivity
-//        Button soccerBtn = findViewById(R.id.soccer_btn);
-//        soccerBtn.setOnClickListener(clk->{
-//            Intent yourPage = new Intent(MainActivity.this, YourActivity.class);
-//            startActivity(yourPage);
-//        });
+       Button soccerBtn = findViewById(R.id.soccer_btn);
+       soccerBtn.setOnClickListener(clk->{
+           Intent loginPage = new Intent(MainActivity.this, LoginPage.class);
+           startActivity(loginPage);
+       });
 //
 //        //Go to CarActivity
 //        Button carBtn = findViewById(R.id.car_btn);
@@ -119,5 +119,4 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_activity_actions, menu);
         return true;
     }
-
 }
