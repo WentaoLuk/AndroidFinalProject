@@ -36,4 +36,10 @@ public class BridgePage extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.news_list_actions, menu);
+        return true;
+    }
 }
