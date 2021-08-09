@@ -24,6 +24,11 @@
     <string name="no">不是</string>
     <string name="alert">提示</string>
     <string name="welcome">歡迎您！</string>
+    <string name="guide">1.在主頁面中可瀏覽所有足球新聞，點擊任意標題可進入詳情頁面。2.詳情頁面中可收藏或取消收藏或在瀏覽器中打開。3.點擊”收藏夾“可查看已收藏文章。 </string>
+    <string name="guide_button">使用指南</string>
+    <string name="welcome_title">足球新聞</string>
+    <string name="welcome_subtitle">歡迎你來看</string>
+
 
 
 

@@ -2,6 +2,7 @@ package algonquin.cst2335.grouproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -64,6 +65,20 @@ public class SoccerListFragment extends Fragment {
             Intent intent = new Intent(getActivity(), NewSavedList.class);
             getActivity().startActivity(intent);
 
+        });
+
+
+        Button guideButton = soccerLayout.findViewById(R.id.guide_button);
+        guideButton.setOnClickListener(e->{
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage(getResources().getString(R.string.guide))
+                    .setCancelable(false)
+                    .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
         });
 
         try {

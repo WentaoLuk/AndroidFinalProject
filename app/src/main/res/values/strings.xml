@@ -22,6 +22,9 @@
     <string name="no">NO</string>
     <string name="alert">ALERT</string>
     <string name="welcome">welcome!</string>
-
+    <string name="guide">1. This main page shows you all the news. You can click any of them for the detail. 2. Inside the detail page. you can save or unsave the article, or you can open the page in browser. 3. Click "SAVED" to see saved articles. 3. </string>
+    <string name="guide_button">GUIDE</string>
+    <string name="welcome_title">Soccer News</string>
+    <string name="welcome_subtitle">See for yourself</string>
 
 </resources>

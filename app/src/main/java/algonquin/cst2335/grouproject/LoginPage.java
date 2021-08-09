@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
@@ -23,8 +24,12 @@ import java.util.regex.Pattern;
 public class LoginPage extends AppCompatActivity {
     private static String TAG = "LoginPage";
 
+    int seconds_in_millis = 2000 ;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 

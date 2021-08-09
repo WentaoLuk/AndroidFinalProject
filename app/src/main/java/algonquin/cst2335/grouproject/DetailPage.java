@@ -32,6 +32,8 @@ public class DetailPage extends AppCompatActivity {
         setContentView(R.layout.detail_page);
 
         Button saveButton = findViewById(R.id.save_button);
+        Button guideButton = findViewById(R.id.guide_button);
+//        guideButton.
         TextView browserButton = findViewById(R.id.browserButton);
 
         TextView title = findViewById(R.id.detail_title);

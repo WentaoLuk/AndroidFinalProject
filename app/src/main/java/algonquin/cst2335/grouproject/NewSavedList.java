@@ -1,6 +1,7 @@
 package algonquin.cst2335.grouproject;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +57,19 @@ public class NewSavedList extends FragmentActivity {
         savedButton.setText(getResources().getString(R.string.go_back_button));
         savedButton.setOnClickListener(e -> {
             finish();
+        });
+
+        Button guideButton = findViewById(R.id.guide_button);
+        guideButton.setOnClickListener(e->{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getResources().getString(R.string.guide))
+                    .setCancelable(false)
+                    .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
         });
 
         adt = new NewsAdapter();
