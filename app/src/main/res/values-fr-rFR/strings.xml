@@ -19,4 +19,21 @@
     <string name="title_goes_here">Titre va ici</string>
     <string name="year_goes_here">Annee va ici</string>
     <string name="save_movie">ENREGISTRER</string>
+
+
+
+
+    <string name= "bus_addButton">Ajouter un itinéraire </string>
+    <string name= "bus_helpButton">Centre daide </string>
+    <string name ="BackButton">Retourner</string>
+    <string name ="route_text">Route:</string>
+    <string name = "oc_wrong_input">Mauvaise entrée</string>
+    <string name = "bus_adjustedTime">Temps ajusté</string>
+    <string name = "bus_coordinates">Coordonnées actuelles</string>
+    <string name = "bus_speed">Vitesse actuelle</string>
+    <string name = "bus_avgAdjustedTime">Temps moyen ajusté</string>
+    <string name = "bus_startTime">Heure de début</string>
+    <string name = "bus_Destination">Destination</string>
+    <string name ="bus_deletestationbutton">Supprimer la station</string>
+    <string name="busBackButton">Back</string>
 </resources>

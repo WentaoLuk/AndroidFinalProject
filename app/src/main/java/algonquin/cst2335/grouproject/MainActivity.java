@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
 
             case R.id.id_OC:
-
+                Intent OC_Main_Activity = new Intent(MainActivity.this, OC_Main_Activity.class);
+                startActivity(OC_Main_Activity);
                 break;
             case R.id.id_car:
-
+              //  Intent MainActivityCharging = new Intent(MainActivity.this, MainActivityCharging.class);
+             //   startActivity(MainActivityCharging);
                 break;
             case R.id.id_movie:
                 Intent movieActivity = new Intent(MainActivity.this,MovieActivity.class);

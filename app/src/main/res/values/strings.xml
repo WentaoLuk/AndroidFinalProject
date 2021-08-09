@@ -19,4 +19,18 @@
     <string name="title_goes_here">Title goes here</string>
     <string name="year_goes_here">Year goes here</string>
     <string name="save_movie">SAVE MOVIE</string>
+
+    <string name= "bus_addButton">Add Stop </string>
+    <string name= "bus_helpButton">Help Center</string>
+    <string name ="BackButton">Back</string>
+    <string name ="route_text">Route:</string>
+    <string name = "oc_wrong_input">Wrong Input</string>
+    <string name = "bus_adjustedTime">Adjusted Time</string>
+    <string name = "bus_coordinates">Current coordinates</string>
+    <string name = "bus_speed">Current Speed</string>
+    <string name = "bus_avgAdjustedTime">Current Speed</string>
+    <string name = "bus_startTime">Current Speed</string>
+    <string name = "bus_Destination">Current Speed</string>
+    <string name ="bus_deletestationbutton">Delete Station</string>
+    <string name="busBackButton">Back</string>
 </resources>
