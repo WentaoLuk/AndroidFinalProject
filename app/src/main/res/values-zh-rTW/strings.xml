@@ -3,7 +3,6 @@
     <string name="app_name">足球新聞</string>
     <string name="author_name">盧文韜</string>
     <string name="news_detail">新聞詳情</string>
-
     <string name="top_title">足球新聞 - 歡迎</string>
     <string name="saved_button">收藏夾</string>
     <string name="save">存入收藏</string>
@@ -28,9 +27,4 @@
     <string name="guide_button">使用指南</string>
     <string name="welcome_title">足球新聞</string>
     <string name="welcome_subtitle">歡迎你來看</string>
-
-
-
-
-
 </resources>

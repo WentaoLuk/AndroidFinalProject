@@ -26,5 +26,23 @@
     <string name="guide_button">GUIDE</string>
     <string name="welcome_title">Soccer News</string>
     <string name="welcome_subtitle">See for yourself</string>
-
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="title">Title</string>
+    <string name="year">Year</string>
+    <string name="rating_goes_here">Rating goes here</string>
+    <string name="runtime_goes_here">Runtime goes here</string>
+    <string name="plot_goes_here">Plot goes here</string>
+    <string name="actors_goes_here">Actors goes here</string>
+    <string name="delete">DELETE</string>
+    <string name="octranspo_bus_route">OCTranspo Bus Route</string>
+    <string name="electric_car_charging_station_finder">Electric Car Charging Station Finder</string>
+    <string name="movie_information">Movie Information</string>
+    <string name="soccer_games_api">Soccer Games API</string>
+    <string name="search_for_more_movies">Search for more movies</string>
+    <string name="type_movie_name">Type in the name of a movie:</string>
+    <string name="search">SEARCH</string>
+    <string name="title_goes_here">Title goes here</string>
+    <string name="year_goes_here">Year goes here</string>
+    <string name="save_movie">SAVE MOVIE</string>
 </resources>
