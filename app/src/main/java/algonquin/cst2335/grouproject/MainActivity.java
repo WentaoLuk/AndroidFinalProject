@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected( MenuItem item) {
         switch(item.getItemId()) {
             case R.id.id_OC:
+                Intent OC_Main_Activity = new Intent(MainActivity.this, OC_Main_Activity.class);
+                startActivity(OC_Main_Activity);
                 break;
             case R.id.id_car:
                 break;
@@ -85,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(moviePage);
         });
 
-//        //Go to OCActivity
-//        Button busBtn = findViewById(R.id.bus_btn);
-//        busBtn.setOnClickListener(clk->{
-//            Intent yourPage = new Intent(MainActivity.this, YourActivity.class);
-//            startActivity(yourPage);
-//        });
-//
+       //Go to OCActivity
+       Button busBtn = findViewById(R.id.bus_btn);
+       busBtn.setOnClickListener(clk->{
+           Intent ocTranspoPage = new Intent(MainActivity.this, OC_Main_Activity.class);
+           startActivity(ocTranspoPage);
+       });
+
        //Go to SoccerActivity
        Button soccerBtn = findViewById(R.id.soccer_btn);
        soccerBtn.setOnClickListener(clk->{
