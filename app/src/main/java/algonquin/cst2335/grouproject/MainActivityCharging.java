@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Locale;
-
 /**
  * this class goes over the station details and loading it
  */
@@ -38,17 +36,28 @@ public class MainActivityCharging extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.charging_station_details);
         titleView = findViewById(R.id.textTitle);
-        phoneNum = findViewById(R.id.phone);
-        latInput = findViewById(R.id.textLatitude);
-        longInput = findViewById(R.id.textLongitude);
-
+        phoneNum = findViewById(R.id.phoneRes);
+        latInput = findViewById(R.id.latitudeResult);
+        longInput = findViewById(R.id.longitudeEdit);
 
         Button mapButton = findViewById(R.id.loadMap);
         mapButton.setOnClickListener(clk -> {
-            String ur = String.format(String.valueOf(latInput), longInput, Locale.ENGLISH, "http://maps.google.com/maps?q=loc:%f,%f");
-            Uri intent = Uri.parse(ur);
-            Intent map = new Intent(Intent.ACTION_VIEW, intent);
-            startActivity(map);
+
+
+            String titleName = titleView.getText().toString();
+            String latString = latInput.getText().toString();
+            String longString = longInput.getText().toString();
+
+
+            String ur1 = String.format("http://maps.google.com/maps?q=loc:%s,%s", latString, longString);
+
+
+            System.out.println("111111111111111111111111111111111111111");
+            System.out.println(ur1);
+            Uri intent = Uri.parse(ur1);
+//            Intent map = new Intent(Intent.ACTION_VIEW, intent);
+            Intent intent1 = new Intent(MainActivityCharging.this, ChargingStation.class);
+            startActivity(intent1);
 
         });
 
@@ -66,8 +75,7 @@ public class MainActivityCharging extends AppCompatActivity {
             String longitude = longInput.getText().toString();
 
 
-
-            if (title=="") {
+            if (title == "") {
                 Toast.makeText(this, "Please input the title", Toast.LENGTH_SHORT).show();
             }
 
@@ -79,7 +87,7 @@ public class MainActivityCharging extends AppCompatActivity {
             rowValues.put(MyOpenHelper.COL_LAT, latitude);
             long Id = db.insert(MyOpenHelper.TABLE_NAME, null, rowValues);
 
-          // StationObject ClickedItem = (StationObject).getSerializableExtra("ClickedItem");
+            // StationObject ClickedItem = (StationObject).getSerializableExtra("ClickedItem");
 
             EditText titleMessage = findViewById(R.id.title);
             stationTitle = ClickedItem.getTitle();
@@ -97,7 +105,7 @@ public class MainActivityCharging extends AppCompatActivity {
             double latValue = ClickedItem.getLatitude();
             latInput.setText(Double.toString(latValue));
 
-            EditText valLongitude = findViewById(R.id.longitudeResult);
+            EditText valLongitude = findViewById(R.id.longitudeEdit);
             double longValue = ClickedItem.getLongitude();
             longInput.setText(Double.toString(longValue));
 
