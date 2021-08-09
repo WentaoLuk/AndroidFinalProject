@@ -29,6 +29,10 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This class manage all the saved news in the fragment activity. It is using the same layout file
+ * as the main news list. But it only displays the news that are saved as favorite news.
+ */
 public class NewSavedList extends FragmentActivity {
 
 
@@ -45,6 +49,13 @@ public class NewSavedList extends FragmentActivity {
     String description;
     String imgUrl;
 
+    /**
+     * When the activity is activated, the program will fetch all the data from the database to
+     * populate the recycler view list. The program is using a cursor object to scan through the
+     * database.
+     *
+     * @param savedInstanceState The previous user settings.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -60,7 +71,7 @@ public class NewSavedList extends FragmentActivity {
         });
 
         Button guideButton = findViewById(R.id.guide_button);
-        guideButton.setOnClickListener(e->{
+        guideButton.setOnClickListener(e -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getResources().getString(R.string.guide))
                     .setCancelable(false)
@@ -104,7 +115,9 @@ public class NewSavedList extends FragmentActivity {
 
     }
 
-
+    /**
+     * This is the view of one row.
+     */
     private class MyRowViews extends RecyclerView.ViewHolder {
 
         TextView titleText;
@@ -125,20 +138,40 @@ public class NewSavedList extends FragmentActivity {
         }
     }
 
-
+    /**
+     * The adapter of the recycler view in order to make the content.
+     */
     private class NewsAdapter extends RecyclerView.Adapter<MyRowViews> {
 
-        //These two methods helps to prevent image from being constantly changed.
+        /**
+         * The getter of Item id. The method helps to prevent image from being constantly changed.
+         *
+         * @param position the position of the Item
+         * @return the position itself
+         */
         @Override
         public long getItemId(int position) {
             return position;
         }
 
+        /**
+         * The getter of Item ItemViewType. The method helps to prevent image from being constantly changed.
+         *
+         * @param position the position of the Item
+         * @return the position itself
+         */
         @Override
         public int getItemViewType(int position) {
             return position;
         }
 
+        /**
+         * This method helps to create the view by building each single news into the recycler view.
+         *
+         * @param parent   the Recycler, which is the container.
+         * @param viewType The type of the view.
+         * @return the initial row view.
+         */
         @Override
         public MyRowViews onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = getLayoutInflater();
@@ -148,7 +181,13 @@ public class NewSavedList extends FragmentActivity {
             return initRow;
         }
 
-
+        /**
+         * The method combines the elements inside the view so that all the information will be
+         * displayed together.
+         *
+         * @param holder   the view object holding the contend.
+         * @param position the position of the view. Different position means different news.
+         */
         @Override
         public void onBindViewHolder(MyRowViews holder, int position) {
             holder.titleText.setText(news.get(position).getTitleName());
@@ -192,30 +231,24 @@ public class NewSavedList extends FragmentActivity {
             });
         }
 
-
+        /**
+         * Getter of the item count
+         *
+         * @return the size of the news list, which represents the count of the items as well.
+         */
         @Override
         public int getItemCount() {
             return news.size();
         }
 
 
-        public int getCount(SQLiteDatabase db, String id) {
-            Cursor c = null;
-            try {
-                String query = "select count(*) from fave_list where id = ?";
-                c = db.rawQuery(query, new String[]{id});
-                if (c.moveToFirst()) {
-                    return c.getInt(0);
-                }
-                return 0;
-            } finally {
-
-            }
-        }
 
     }
 
-
+    /**
+     * This class represents one row message displayed in the main news list.
+     * The message view contains title, date and the picture.
+     */
     public class oneRowMessage {
         int id;
         String pubDate;

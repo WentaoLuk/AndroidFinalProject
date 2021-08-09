@@ -12,19 +12,28 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -41,6 +50,10 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This class is the news list class of the activity. All the news will be fetched from the server and displayed on here.
+ * The main page has Navigation menu and tool bar on the top, and the saved list button and guide button on the bottom.
+ */
 public class SoccerListFragment extends Fragment {
     oneRowMessage titleMessage;
     RecyclerView soccerList;
@@ -51,13 +64,50 @@ public class SoccerListFragment extends Fragment {
     String mainTitle;
     HashMap<Integer, HashMap<String, String>> items = new HashMap<>();
     String email;
+    View soccerLayout;
 
+    /**
+     * This method is to create option menu.
+     *
+     * @param menu     The menu to be displayed on Toolbar and navigation menu list.
+     * @param inflater The menu inflater
+     */
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     * The method runs when the activity is activated.
+     *
+     * @param inflater           The inflater of the recyclerview.
+     * @param container          the container of the activity
+     * @param savedInstanceState the saved state and profile of the app.
+     * @return the layout view itself.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View soccerLayout = getLayoutInflater().inflate(R.layout.news_list, container, false);
-
+        soccerLayout = getLayoutInflater().inflate(R.layout.news_list, container, false);
         soccerList = soccerLayout.findViewById(R.id.myRecycler);
         fetchData();
+
+        Toolbar myToolbar = soccerLayout.findViewById(R.id.toolbar_soccer);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
+        DrawerLayout drawer = soccerLayout.findViewById(R.id.drawer_layout_soccer);
+        NavigationView navigationView = soccerLayout.findViewById(R.id.popout_menu_soccer);
+//        navigationView
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+
+            onOptionsItemSelected(item);
+            drawer.closeDrawer(GravityCompat.START);
+            return false;
+        });
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), drawer, myToolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
 
         savedButton = soccerLayout.findViewById(R.id.savedButton);
         savedButton.setOnClickListener(e -> {
@@ -69,7 +119,7 @@ public class SoccerListFragment extends Fragment {
 
 
         Button guideButton = soccerLayout.findViewById(R.id.guide_button);
-        guideButton.setOnClickListener(e->{
+        guideButton.setOnClickListener(e -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setMessage(getResources().getString(R.string.guide))
                     .setCancelable(false)
@@ -80,6 +130,8 @@ public class SoccerListFragment extends Fragment {
             AlertDialog alert = builder.create();
             alert.show();
         });
+
+        setHasOptionsMenu(true);
 
         try {
             Thread.sleep(1500);
@@ -104,7 +156,7 @@ public class SoccerListFragment extends Fragment {
 
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null) {
-             email = extras.getString("email") + "";
+            email = extras.getString("email") + "";
         }
         String snackMessage = getResources().getString(R.string.welcome) + email;
         Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), snackMessage, Snackbar.LENGTH_LONG);
@@ -116,6 +168,10 @@ public class SoccerListFragment extends Fragment {
     }
 
 
+    /**
+     * This class represents one row message displayed in the main news list.
+     * The message view contains title, date and the picture.
+     */
     public class oneRowMessage {
         int id;
         String pubDate;
@@ -124,6 +180,17 @@ public class SoccerListFragment extends Fragment {
         String description;
         String imgUrl;
 
+
+        /**
+         * The constructor of the oneRowMessage object.
+         *
+         * @param id          The id given to each news.
+         * @param pubDate     The publication date of the news.
+         * @param link        The link of the news.
+         * @param titleName   The title of the news.
+         * @param description The description of the news.
+         * @param imgUrl      The image URL of the news.
+         */
         public oneRowMessage(int id, String pubDate, String link, String titleName, String description, String imgUrl) {
             this.id = id;
             this.pubDate = pubDate;
@@ -133,44 +200,76 @@ public class SoccerListFragment extends Fragment {
             this.imgUrl = imgUrl;
         }
 
+        /**
+         * The getter of the id
+         *
+         * @return Id itself.
+         */
         public int getId() {
             return id;
         }
 
+        /**
+         * The getter of the publication date
+         *
+         * @return The publication date itself.
+         */
         public String getPubDate() {
             return pubDate;
         }
 
+        /**
+         * The getter of the link.
+         *
+         * @return The link itself.
+         */
         public String getLink() {
             return link;
         }
 
+        /**
+         * The getter of the title.
+         *
+         * @return The title itself.
+         */
         public String getTitleName() {
             return titleName;
         }
 
+        /**
+         * The getter of the description.
+         *
+         * @return The description itself.
+         */
         public String getDescription() {
             return description;
         }
 
-
+        /**
+         * The getter of the image URL.
+         *
+         * @return The image URL itself.
+         */
         public String getImgUrl() {
             return imgUrl;
         }
     }
 
-
+    /**
+     * This is the view of one row.
+     */
     private class MyRowViews extends RecyclerView.ViewHolder {
-
 
         TextView titleText;
         TextView dateText;
         ImageView imagePreview;
         int position = -1;
 
-
-        //        int position = -1;
-        //Constructor
+        /**
+         * The constructor of the row view.
+         *
+         * @param itemView the view itself.
+         */
         public MyRowViews(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.message);
@@ -178,25 +277,50 @@ public class SoccerListFragment extends Fragment {
             imagePreview = itemView.findViewById(R.id.imageView);
         }
 
+        /**
+         * The setter of the position
+         *
+         * @param position the position number of each view, starting from 1.
+         */
         public void setPosition(int position) {
             this.position = position;
         }
     }
 
-
+    /**
+     * The adapter of the recycler view in order to make the content.
+     */
     private class NewsAdapter extends RecyclerView.Adapter<MyRowViews> {
 
-        //These two methods helps to prevent image from being constantly changed.
+        /**
+         * The getter of Item id. The method helps to prevent image from being constantly changed.
+         *
+         * @param position the position of the Item
+         * @return the position itself
+         */
         @Override
         public long getItemId(int position) {
             return position;
         }
 
+        /**
+         * The getter of Item ItemViewType. The method helps to prevent image from being constantly changed.
+         *
+         * @param position the position of the Item
+         * @return the position itself
+         */
         @Override
         public int getItemViewType(int position) {
             return position;
         }
 
+        /**
+         * This method helps to create the view by building each single news into the recycler view.
+         *
+         * @param parent   the Recycler, which is the container.
+         * @param viewType The type of the view.
+         * @return the initial row view.
+         */
         @Override
         public MyRowViews onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater inflater = getLayoutInflater();
@@ -206,6 +330,13 @@ public class SoccerListFragment extends Fragment {
             return initRow;
         }
 
+        /**
+         * The method combines the elements inside the view so that all the information will be
+         * displayed together.
+         *
+         * @param holder   the view object holding the contend.
+         * @param position the position of the view. Different position means different news.
+         */
         @Override
         public void onBindViewHolder(MyRowViews holder, int position) {
             holder.titleText.setText(news.get(position).getTitleName());
@@ -252,6 +383,11 @@ public class SoccerListFragment extends Fragment {
             });
         }
 
+        /**
+         * Getter of the item count
+         *
+         * @return the size of the news list, which represents the count of the items as well.
+         */
         @Override
         public int getItemCount() {
             return news.size();
@@ -259,18 +395,11 @@ public class SoccerListFragment extends Fragment {
 
     }
 
-    private class Builder extends AlertDialog.Builder {
-
-        public Builder(Context context) {
-            super(context);
-        }
-
-        public Builder(Context context, int themeResId) {
-
-            super(context, themeResId);
-        }
-    }
-
+    /**
+     * This method is the main method to fetch the data from the server.
+     * The data is from a String URL and the method will pull all the data and store it into
+     * the news list for later use.
+     */
     private void fetchData() {
 
         ExecutorService newThread = Executors.newSingleThreadExecutor();
@@ -332,10 +461,8 @@ public class SoccerListFragment extends Fragment {
                                 }
                                 items.put(itemIndex++, item);
                             }
-
                             break;
                         case XmlPullParser.END_TAG:
-                            break;
                         case XmlPullParser.TEXT:
                             break;
                     }
@@ -349,8 +476,33 @@ public class SoccerListFragment extends Fragment {
     }
 
     /**
-     * This function is to make sure whenever user click back to the fav list page, the page layout will
-     * be refreshed to make sure it is up to date.
+     * This method is to assign the task for the app when the menu items are selected by user.
+     *
+     * @param item The menu item, containing Guide and Saved List.
+     * @return boolean Return false to allow normal menu processing to proceed, true to consume it here.
      */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.saved_soccer:
+                Intent intent = new Intent(getActivity(), NewSavedList.class);
+                getActivity().startActivity(intent);
+                break;
+
+            case R.id.guide_soccer:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage(getResources().getString(R.string.guide))
+                        .setCancelable(false)
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +26,22 @@ import java.util.regex.Pattern;
 public class LoginPage extends AppCompatActivity {
     private static String TAG = "LoginPage";
 
-    int seconds_in_millis = 2000 ;
+    /**
+     * The method to create the option menu.
+     * @param menu The menu objects passed into the menu.
+     * @return The boolean number which is always true.
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.news_list_actions, menu);
+        return true;
+    }
 
-
+    /**
+     * The onCreate function is triggered everytime when the activity is activated/
+     * @param savedInstanceState The previous user settings.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

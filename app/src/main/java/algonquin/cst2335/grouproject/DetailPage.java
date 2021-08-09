@@ -23,8 +23,10 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * This is the detail page of the soccer news displaying the news information in detail.
+ */
 public class DetailPage extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,6 @@ public class DetailPage extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.save_button);
         Button guideButton = findViewById(R.id.guide_button);
-//        guideButton.
         TextView browserButton = findViewById(R.id.browserButton);
 
         TextView title = findViewById(R.id.detail_title);
@@ -142,6 +143,13 @@ public class DetailPage extends AppCompatActivity {
 
     }
 
+    /**
+     * This method gets the item count to make sure it only contain one or zero result for the each
+     * news.
+     * @param db The database object
+     * @param id The id that needs to be checked to see if it exists.
+     * @return 0 if it is not exist or the number of results the program has for the same id.
+     */
     public int getCount(SQLiteDatabase db, String id) {
         Cursor c = null;
         try {

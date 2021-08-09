@@ -27,4 +27,6 @@
     <string name="guide_button">使用指南</string>
     <string name="welcome_title">足球新聞</string>
     <string name="welcome_subtitle">歡迎你來看</string>
+    <string name="soccer_info">足球新聞 | 作者： 盧文韜 | 版本：1.0</string>
+
 </resources>

@@ -60,4 +60,6 @@
     <string name = "bus_Destination">Current Speed</string>
     <string name ="bus_deletestationbutton">Delete Station</string>
     <string name="busBackButton">Back</string>
+    <string name="soccer_info">Soccer News | Author: Wentao Lu | V1.0</string>
+
 </resources>
