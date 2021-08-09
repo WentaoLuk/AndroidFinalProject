@@ -51,7 +51,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * This class is the news list class of the activity. All the news will be fetched from the server and displayed on here.
+ * This class is the news list class of the activity. All the n1ews will be fetched from the server and displayed on here.
  * The main page has Navigation menu and tool bar on the top, and the saved list button and guide button on the bottom.
  */
 public class SoccerListFragment extends Fragment {
