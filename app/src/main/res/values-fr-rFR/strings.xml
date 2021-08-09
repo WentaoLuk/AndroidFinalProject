@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">GroupProject</string>
+    <string name="open">ouvert</string>
+    <string name="close">fermer</string>
+    <string name="title">Titre</string>
+    <string name="year">Annee</string>
+    <string name="rating_goes_here">La note va ici</string>
+    <string name="runtime_goes_here">Duree va ici</string>
+    <string name="plot_goes_here">Intrigue va ici</string>
+    <string name="actors_goes_here">Les Acteurs vont ici </string>
+    <string name="delete">EFFACER</string>
+    <string name="octranspo_bus_route">d\'autobus OC Transpo</string>
+    <string name="electric_car_charging_station_finder">station voiture electrique</string>
+    <string name="movie_information">Recherche de films</string>
+    <string name="soccer_games_api">Football API</string>
+    <string name="search_for_more_movies">rechercher plus de films</string>
+    <string name="type_movie_name">taper le nom du film:</string>
+    <string name="search">RECHERCHER</string>
+    <string name="title_goes_here">Titre va ici</string>
+    <string name="year_goes_here">Annee va ici</string>
+    <string name="save_movie">ENREGISTRER</string>
+</resources>
