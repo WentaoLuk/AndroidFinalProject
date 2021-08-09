@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textTitle"
+        android:text="title"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:text="title"/>
+
+    <TextView
+        android:layout_below="@id/title"
+        android:id="@+id/textLatitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="latitude"/>
+
+    <EditText android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitudeResult"
+        android:text="latitude"
+        android:layout_below="@id/textLatitude"/>
+    <TextView
+        android:layout_below="@id/latitudeResult"
+        android:id="@+id/textLongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="longitude"/>
+
+    <EditText android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitudeResult"
+        android:text="longitude"
+        android:layout_below="@id/textLongitude"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phone"
+        android:text="phone"
+        android:layout_below="@id/longitudeResult"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneRes"
+        android:text="phone"
+        android:layout_below="@id/phone"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loadMap"
+        android:text="loadMap"
+        android:layout_below="@id/phoneRes"/>
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/listOfFavouritesButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="add"/>
+
+    <Button
+        android:id="@+id/listOfFavouritesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="listOfFavourites"/>
+
+</LinearLayout>
