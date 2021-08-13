@@ -1,8 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">GrouProject</string>
-    <string name="nullNumber">nullNumber</string>
-   
+    <string name="app_name">GrouProject</string>
+
+
     <string name="Title">لقب</string>
     <string name="latitude">خط العرض</string>
     <string name="longitude">خط الطول</string>
+    <string name="nullNumber">رقم</string>
 </resources>

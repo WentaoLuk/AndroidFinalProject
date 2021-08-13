@@ -81,13 +81,6 @@ public class ChargingStation extends AppCompatActivity {
         });
 
 
-//        list.setOnItemClickListener(( parent,  view,  position,  id) ->{
-//            StationObject chosenOne = stations.get(position);
-//            Intent nextPage = new Intent(ChargingStation.this, MainActivityCharging.class);
-//            nextPage.putExtra("itemClicked", (Parcelable) chosenOne);
-//            startActivity(nextPage);
-//        });
-
 
         String latitudeValue = sharedPref.getString("Latitude", "");
         latitude.setText(latitudeValue);

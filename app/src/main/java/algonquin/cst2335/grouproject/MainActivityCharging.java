@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 /**
  * this class goes over the station details and loading it
  */
@@ -28,7 +30,6 @@ public class MainActivityCharging extends AppCompatActivity {
 
     /**
      * this method loads details and location and adds it to the favourite list
-     *
      * @param savedInstanceState
      */
     @Override
@@ -52,10 +53,9 @@ public class MainActivityCharging extends AppCompatActivity {
             String ur1 = String.format("http://maps.google.com/maps?q=loc:%s,%s", latString, longString);
 
 
-            System.out.println("111111111111111111111111111111111111111");
+            System.out.println("1111111");
             System.out.println(ur1);
             Uri intent = Uri.parse(ur1);
-//            Intent map = new Intent(Intent.ACTION_VIEW, intent);
             Intent intent1 = new Intent(MainActivityCharging.this, ChargingStation.class);
             startActivity(intent1);
 
@@ -82,12 +82,12 @@ public class MainActivityCharging extends AppCompatActivity {
 
             ContentValues rowValues = new ContentValues();
             rowValues.put(MyOpenHelper.COL_PHONE, telephone);
-            rowValues.put(MyOpenHelper.COL_LocTitle, stationTitle);
+            rowValues.put(MyOpenHelper.COL_LocTitle, title);
             rowValues.put(MyOpenHelper.COL_LONG, longitude);
             rowValues.put(MyOpenHelper.COL_LAT, latitude);
             long Id = db.insert(MyOpenHelper.TABLE_NAME, null, rowValues);
 
-            // StationObject ClickedItem = (StationObject).getSerializableExtra("ClickedItem");
+
 
             EditText titleMessage = findViewById(R.id.title);
             stationTitle = ClickedItem.getTitle();
