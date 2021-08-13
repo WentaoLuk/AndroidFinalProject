@@ -58,7 +58,7 @@ public class ChargingStation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_charging_station);
+        setContentView(R.layout.activity_favourite_stations);
         Button findButton = findViewById(R.id.searchButton);
         final EditText latitude = findViewById(R.id.latitudeInput);
         longitude = findViewById(R.id.longitudeInput);

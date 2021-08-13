@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/yearView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/year"
+        app:layout_constraintStart_toStartOf="@+id/titleView"
+        app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+    <TextView
+        android:id="@+id/ratingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/rating_goes_here"
+        app:layout_constraintStart_toStartOf="@+id/yearView"
+        app:layout_constraintTop_toBottomOf="@+id/yearView" />
+
+
+    <TextView
+        android:id="@+id/runtimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/runtime_goes_here"
+        app:layout_constraintStart_toStartOf="@+id/ratingView"
+        app:layout_constraintTop_toBottomOf="@+id/ratingView" />
+
+    <TextView
+        android:id="@+id/plotView"
+        android:layout_width="329dp"
+        android:layout_height="69dp"
+        android:text="@string/plot_goes_here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/runtimeView"
+        app:layout_constraintTop_toBottomOf="@+id/runtimeView" />
+
+    <TextView
+        android:id="@+id/actorsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/actors_goes_here"
+        app:layout_constraintStart_toStartOf="@+id/plotView"
+        app:layout_constraintTop_toBottomOf="@+id/plotView" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/posterView"
+        android:layout_width="279dp"
+        android:layout_height="293dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@+id/actorsView"
+        app:layout_constraintTop_toBottomOf="@+id/actorsView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

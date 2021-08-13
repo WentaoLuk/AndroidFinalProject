@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/id_OC"
+        android:icon="@drawable/bus"
+        android:title="OC Transpo"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/id_car"
+        android:icon="@drawable/car"
+        android:title="Electric Car"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/id_movie"
+        android:icon="@drawable/movie_icon"
+        android:title="Movies - Jade Mak"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/id_soccer"
+        android:icon="@drawable/soccer"
+        android:title="Soccer"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/help"
+        android:icon="@drawable/help"
+        android:title="Help"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">足球新聞</string>
+    <string name="author_name">盧文韜</string>
+    <string name="news_detail">新聞詳情</string>
+    <string name="top_title">足球新聞 - 歡迎</string>
+    <string name="saved_button">收藏夾</string>
+    <string name="save">存入收藏</string>
+    <string name="unsave">取消收藏</string>
+    <string name="open_in_browser">在瀏覽器中打開</string>
+    <string name="article_saved_notice">文章已存至收藏夾！</string>
+    <string name="article_removed_notice">文章以移出收藏夾！</string>
+    <string name="article_delete_confirm">是否確認移除出收藏夾？</string>
+    <string name="email_address_prompt">郵箱：</string>
+    <string name="email_placeholder">請在此處輸入郵箱</string>
+    <string name="password_prompt">密碼：</string>
+    <string name="password_placeholder">請在此處輸入密碼</string>
+    <string name="login_button">登入</string>
+    <string name="go_back_button">返回</string>
+    <string name="incorrect_email_alert">郵箱格式不正確，請重新輸入！</string>
+    <string name="ok">好</string>
+    <string name="yes">是</string>
+    <string name="no">不是</string>
+    <string name="alert">提示</string>
+    <string name="welcome">歡迎您！</string>
+    <string name="guide">1.在主頁面中可瀏覽所有足球新聞，點擊任意標題可進入詳情頁面。2.詳情頁面中可收藏或取消收藏或在瀏覽器中打開。3.點擊”收藏夾“可查看已收藏文章。 </string>
+    <string name="guide_button">使用指南</string>
+    <string name="welcome_title">足球新聞</string>
+    <string name="welcome_subtitle">歡迎你來看</string>
+    <string name="soccer_info">足球新聞 | 作者： 盧文韜 | 版本：1.0</string>
+
+</resources>

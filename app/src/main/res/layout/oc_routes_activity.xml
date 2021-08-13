@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".OC_Main_Activity" >
+
+
+    <TextView
+        android:id="@+id/routenoDestinationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" @string/bus_Destination"
+        />
+
+    <TextView
+        android:id="@+id/directionView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        />
+
+    <TextView
+        android:id="@+id/startTimeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        />
+
+    <TextView
+        android:id="@+id/adjustedTimeView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bus_adjustedTime"
+        />
+
+    <TextView
+        android:id="@+id/coordinatesView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" @string/bus_coordinates"
+        />
+
+    <TextView
+        android:id="@+id/speedView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bus_speed"
+        />
+
+    <TextView
+        android:id="@+id/averageAdjustedTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bus_avgAdjustedTime"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/busBackButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/BackButton"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>
