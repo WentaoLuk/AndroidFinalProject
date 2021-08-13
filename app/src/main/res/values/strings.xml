@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">GrouProject</string>
+    <string name="app_name" translatable="false">GrouProject</string>
     <string name="nullNumber">nullNumber</string>
+
+   
+    <string name="TitleStation">لقب</string>
+    <string name="latitude">خط العرض</string>
+    <string name="longitude">خط الطول</string>
+
     <string name="author_name">Wentao Lu</string>
     <string name="top_title">Soccer News</string>
     <string name="news_detail">News Detail</string>

@@ -11,48 +11,48 @@
         android:text="title"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/title"
-        android:text="title"/>
+        android:hint="title"/>
 
     <TextView
         android:layout_below="@id/title"
         android:id="@+id/textLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="latitude"/>
+        android:hint="latitude"/>
 
-    <EditText android:layout_width="wrap_content"
+    <EditText android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/latitudeResult"
-        android:text="latitude"
+        android:hint="latitude"
         android:layout_below="@id/textLatitude"/>
     <TextView
         android:layout_below="@id/latitudeResult"
-        android:id="@+id/textLongitude"
+        android:id="@+id/textLongitudeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="longitude"/>
 
-    <EditText android:layout_width="wrap_content"
+    <EditText android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/longitudeResult"
-        android:text="longitude"
-        android:layout_below="@id/textLongitude"/>
+        android:id="@+id/longitudeEdit"
+        android:hint="longitude"
+        android:layout_below="@id/textLongitudeTitle"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/phone"
         android:text="phone"
-        android:layout_below="@id/longitudeResult"/>
+        android:layout_below="@id/longitudeEdit"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/phoneRes"
-        android:text="phone"
+        android:hint="phone"
         android:layout_below="@id/phone"/>
 
     <Button
